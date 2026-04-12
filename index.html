@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Megahn Christianson | Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0f0d0b;
+    --bg-2:      #1a1612;
+    --bg-3:      #241f18;
+    --rust:      #c1440e;
+    --rust-dim:  #8a2f09;
+    --rust-glow: rgba(193,68,14,0.15);
+    --amber:     #d4892a;
+    --amber-dim: rgba(212,137,42,0.12);
+    --cream:     #e8dcc8;
+    --cream-dim: rgba(232,220,200,0.55);
+    --muted:     rgba(232,220,200,0.35);
+    --line:      rgba(232,220,200,0.08);
+    --line-rust: rgba(193,68,14,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Mono', monospace;
+    background: var(--bg);
+    color: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 3rem;
+    background: rgba(15,13,11,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line-rust);
+  }
+
+  .nav-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--rust);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--rust);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  h1 .scratch {
+    color: var(--rust);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--cream-dim);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    line-height: 1.9;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-rust {
+    background: var(--rust);
+    color: #fff;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .btn-rust:hover { background: #d94f17; }
+
+  .btn-outline {
+    border: 1px solid var(--line-rust);
+    color: var(--rust);
+    background: transparent;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .btn-outline:hover { background: var(--rust-glow); }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: 3rem;
+    right: -1rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(5rem, 12vw, 10rem);
+    color: rgba(193,68,14,0.04);
+    user-select: none;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* SECTION */
+  .section-wrap {
+    padding: 5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 1px;
+    background: var(--rust);
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    line-height: 1.9;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+    margin-bottom: 1rem;
+    line-height: 1.9;
+  }
+
+  .about-text p strong {
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .interest-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--line-rust);
+    color: var(--rust);
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+  }
+
+  /* skill bars */
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-name {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+
+  .skill-pct {
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .skill-bar-bg {
+    height: 4px;
+    background: var(--bg-3);
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust-dim), var(--rust));
+  }
+
+  /* EXPERIENCE */
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .exp-card {
+    background: var(--bg-2);
+    padding: 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--rust-dim);
+    transition: background 0.2s;
+  }
+
+  .exp-card:hover { background: var(--bg-3); }
+  .exp-card:hover::before { background: var(--rust); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--cream);
+  }
+
+  .exp-dates {
+    font-size: 0.68rem;
+    color: var(--rust);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .exp-company {
+    font-size: 0.78rem;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+
+  .exp-desc {
+    font-size: 0.8rem;
+    color: var(--cream-dim);
+    line-height: 1.85;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .exp-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid rgba(212,137,42,0.2);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  .project-card {
+    background: var(--bg-2);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--rust);
+    transition: height 0.3s ease;
+  }
+
+  .project-card:hover { background: var(--bg-3); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-num {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-desc {
+    font-size: 0.8rem;
+    color: var(--cream-dim);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid rgba(212,137,42,0.2);
+  }
+
+  /* EDUCATION */
+  .edu-block {
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 2rem 2.5rem;
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+    max-width: 680px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .edu-year {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    white-space: nowrap;
+    padding-top: 0.25rem;
+  }
+
+  .edu-school {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-program {
+    font-size: 0.8rem;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-detail {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* CONTACT */
+  .contact-block {
+    background: var(--bg-2);
+    border: 1px solid var(--line-rust);
+    padding: 3.5rem;
+    max-width: 1100px;
+    margin: 0 auto 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rust), var(--amber), transparent);
+  }
+
+  .contact-text h2 { margin-bottom: 0.5rem; font-size: 2rem; }
+
+  .contact-text p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    max-width: 420px;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 3rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .section-wrap { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .exp-card { padding: 1.5rem; }
+    .contact-block { flex-direction: column; padding: 2rem 1.5rem; }
+    .hero-bg-text { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Megahn Christianson</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Program Management · Data Analytics · She/They</div>
+  <h1><span class="scratch">Meg</span>ahn<br>Christianson.</h1>
+  <p class="hero-sub">
+    Nearly a decade of real-world experience in financial services, leadership, and process 
+    improvement — now channeling it into data analytics and scalable data solutions. 
+    I find patterns in chaos. It's kind of my thing.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-rust">See my work</a>
+    <a href="#contact" class="btn btn-outline">Get in touch</a>
+  </div>
+  <div class="hero-bg-text">DATA.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="section-label">About me</div>
+  <h2>Scientist. Analyst. Chaos agent.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I bring over a decade of experience in customer service, leadership, and creative 
+        problem-solving across financial services and design. At <strong>Nelnet Diversified Services</strong>, 
+        I led teams, coordinated workflows, managed internal audits, and drove process improvements 
+        that actually moved the needle.
+      </p>
+      <p>
+        Now I'm pivoting hard into data — working toward my IT Data Analyst degree at CVTC 
+        with a long-term goal of moving into <strong>data architecture</strong>. My capstone project, 
+        the High Score Database, is where the formal training gets real.
+      </p>
+      <p>
+        My approach to data looks a lot like my approach to the natural world: get your hands dirty, 
+        look closer than feels comfortable, and don't panic when things get messy. I have ADHD, 
+        which means I notice everything. Outside of work you'll find me obsessing over bugs, 
+        music, and whatever the forest is doing.
+      </p>
+      <div class="interests">
+        <span class="interest-tag">Bugs &amp; entomology</span>
+        <span class="interest-tag">Music</span>
+        <span class="interest-tag">Natural world</span>
+        <span class="interest-tag">Data architecture</span>
+        <span class="interest-tag">Process improvement</span>
+        <span class="interest-tag">ADHD brain</span>
+      </div>
+    </div>
+    <div class="skills-list">
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Python &amp; scikit-learn</span>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">SQL / MySQL</span>
+          <span class="skill-pct">75%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Power BI &amp; DAX</span>
+          <span class="skill-pct">72%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Excel &amp; data wrangling</span>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Leadership &amp; team management</span>
+          <span class="skill-pct">95%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-header">
+          <span class="skill-name">Process improvement</span>
+          <span class="skill-pct">90%</span>
+        </div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<div class="section-wrap" id="experience">
+  <div class="section-label">Experience</div>
+  <h2>Where I've put in the work.</h2>
+  <p class="section-intro">Nearly 6 years in financial services + almost 8 years in design. Real jobs, real stakes, real data.</p>
+
+  <div class="experience-list">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-title">Specialist III (Program Management)</div>
+        <div class="exp-dates">Dec 2024 — Present</div>
+      </div>
+      <div class="exp-company">Nelnet Diversified Services · Remote</div>
+      <p class="exp-desc">
+        Currently serving as a Specialist III focused on private student loan program management. 
+        Building on years of process leadership, cross-functional coordination, and operational oversight 
+        to drive department performance and risk reduction.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Program Management</span>
+        <span class="exp-tag">Risk Reduction</span>
+        <span class="exp-tag">Cross-functional teams</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-title">Specialist II / Interim Team Lead</div>
+        <div class="exp-dates">Aug 2020 — Jan 2025 · 4 yrs 6 mos</div>
+      </div>
+      <div class="exp-company">Nelnet Diversified Services (FirstMark Services) · Remote</div>
+      <p class="exp-desc">
+        Led teams and coordinated daily, weekly, and monthly workflows as Interim Team Lead. 
+        Contributed to continuous process improvements, coordinated internal audits, and mentored team 
+        members. Applied hands-on data analysis and quality control to streamline operations and 
+        improve customer experience. Managed special projects aimed at enhancing department 
+        performance and reducing operational risk.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">Team Leadership</span>
+        <span class="exp-tag">Data Analysis</span>
+        <span class="exp-tag">Internal Audits</span>
+        <span class="exp-tag">Quality Control</span>
+        <span class="exp-tag">Process Optimization</span>
+        <span class="exp-tag">Mentorship</span>
+        <span class="exp-tag">Excel</span>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-title">Designer</div>
+        <div class="exp-dates">Jul 2018 — Present · 7 yrs 10 mos</div>
+      </div>
+      <div class="exp-company">Brent Douglas Flowers</div>
+      <p class="exp-desc">
+        Long-running creative role applying design thinking, customer relationship management, 
+        and client communication skills. Demonstrates the kind of sustained creative problem-solving 
+        and CRM experience that translates directly into data-driven customer insight work.
+      </p>
+      <div class="exp-tags">
+        <span class="exp-tag">CRM</span>
+        <span class="exp-tag">Design</span>
+        <span class="exp-tag">Client Relations</span>
+        <span class="exp-tag">Creative Problem-solving</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects">
+  <div class="section-label">Projects</div>
+  <h2>Work I've actually built.</h2>
+  <p class="section-intro">Capstone and coursework projects from CVTC. More coming as the program wraps up.</p>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">// 01</div>
+      <div class="project-title">The Final Boss Report</div>
+      <p class="project-desc">
+        Capstone project: a full relational database, ETL pipeline, and Power BI dashboard 
+        built around a Kaggle video game sales and ratings dataset. Covers genre trends, 
+        regional platform performance, and critic score vs. sales correlation.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">ETL</span>
+        <span class="project-tag">DAX</span>
+        <span class="project-tag">Kaggle</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">// 02</div>
+      <div class="project-title">ML Regression Models</div>
+      <p class="project-desc">
+        Built and tuned regression models in Python using scikit-learn and pandas. 
+        Worked through preprocessing pipelines, train/test splits, and data leakage 
+        prevention — learned it the hard way, which means it stuck.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">scikit-learn</span>
+        <span class="project-tag">pandas</span>
+        <span class="project-tag">Jupyter</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">// 03</div>
+      <div class="project-title">Power BI Airline Dashboard</div>
+      <p class="project-desc">
+        Interactive airline data dashboard in Power BI. Calculated columns, DAX measures, 
+        and multi-page reports against a structured data model. Learned that COUNTROWS 
+        takes a table, not a column. Won't forget that one.
+      </p>
+      <div class="project-tags">
+        <span class="project-tag">Power BI</span>
+        <span class="project-tag">DAX</span>
+        <span class="project-tag">Data modeling</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<div class="section-wrap" id="education">
+  <div class="section-label">Education</div>
+  <h2>Where I'm learning.</h2>
+  <div class="edu-block" style="margin-bottom: 1px;">
+    <div class="edu-year">2024 —<br>2026</div>
+    <div>
+      <div class="edu-school">Chippewa Valley Technical College</div>
+      <div class="edu-program">IT — Data Analyst Program</div>
+      <div class="edu-detail">
+        Machine Learning &nbsp;·&nbsp; Database Design &nbsp;·&nbsp; Power BI<br>
+        Data Visualization &nbsp;·&nbsp; Environmental Science &nbsp;·&nbsp; Data Analyst Capstone
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 2.5rem;">
+    <div class="section-label" style="margin-bottom: 1.25rem;">Where I'm going</div>
+    <div class="edu-block" style="border-color: var(--line-rust);">
+      <div class="edu-year">2025 —<br>ongoing</div>
+      <div>
+        <div class="edu-school">University of Wisconsin — Stout</div>
+        <div class="edu-program">B.S. Business Information Technology</div>
+        <div class="edu-detail">
+          Minor: Business Intelligence &amp; Analytics<br>
+          Starting Summer 2025 &nbsp;·&nbsp; Building toward data architecture
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-block" id="contact">
+  <div class="contact-text">
+    <div class="section-label">Contact</div>
+    <h2>Let's talk data.</h2>
+    <p>Open to data analyst roles, internships, and conversations about scalable data solutions. Also always down to talk bugs, music, or weird datasets.</p>
+  </div>
+  <div class="contact-links">
+    <a href="/cdn-cgi/l/email-protection#9ee7f1ebecdefbf3fff7f2b0fdf1f3" class="btn btn-rust">Email me</a>
+    <a href="https://github.com/MCChristi" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/megahn-christianson-359172227/" class="btn btn-outline" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<footer>
+  Built with GitHub Pages &nbsp;·&nbsp; Megahn Christianson &c

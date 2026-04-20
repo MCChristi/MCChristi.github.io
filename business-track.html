@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Track | Megahn Christianson</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#0f0d0b; --bg-2:#1a1612; --bg-3:#241f18;
+    --rust:#c1440e; --rust-dim:#8a2f09; --rust-glow:rgba(193,68,14,0.15);
+    --amber:#d4892a; --amber-dim:rgba(212,137,42,0.12);
+    --cream:#e8dcc8; --cream-dim:rgba(232,220,200,0.55);
+    --muted:rgba(232,220,200,0.35); --line:rgba(232,220,200,0.08);
+    --line-rust:rgba(193,68,14,0.3);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Space Mono',monospace; background:var(--bg); color:var(--cream); line-height:1.7; overflow-x:hidden; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.1rem 3rem; background:rgba(15,13,11,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line-rust); }
+  .nav-name { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.04em; color:var(--rust); text-decoration:none; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--rust); }
+  .page-header { padding:9rem 3rem 4rem; max-width:1100px; margin:0 auto; position:relative; }
+  .breadcrumb { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .breadcrumb a { color:var(--rust); text-decoration:none; }
+  .breadcrumb a:hover { opacity:0.7; }
+  .breadcrumb-sep { color:var(--muted); }
+  .track-eyebrow { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem; }
+  .track-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--rust); }
+  h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.5rem,6vw,5rem); line-height:1.0; color:var(--cream); margin-bottom:1rem; letter-spacing:-0.02em; }
+  h1 .scratch { color:var(--rust); font-style:italic; }
+  .page-intro { font-size:0.88rem; color:var(--cream-dim); max-width:620px; line-height:1.9; margin-bottom:1.5rem; }
+  .vendor-link { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(212,137,42,0.3); padding-bottom:1px; transition:border-color 0.2s,color 0.2s; }
+  .vendor-link:hover { color:var(--cream); border-color:var(--cream-dim); }
+  .vendor-link::after { content:'↗'; font-size:0.9em; }
+  .vendor-links-row { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:0.5rem; }
+  .header-bg-text { position:absolute; bottom:1rem; right:-1rem; font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(4rem,10vw,8rem); color:rgba(193,68,14,0.04); user-select:none; letter-spacing:-0.04em; line-height:1; pointer-events:none; }
+  .section-wrap { padding:4rem 3rem; max-width:1100px; margin:0 auto; }
+  .section-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
+  .section-label::before { content:''; display:inline-block; width:20px; height:1px; background:var(--rust); }
+  h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(1.6rem,2.5vw,2.2rem); color:var(--cream); margin-bottom:0.5rem; letter-spacing:-0.01em; }
+  h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; color:var(--cream); margin-bottom:0.4rem; }
+  hr.divider { border:none; border-top:1px solid var(--line); max-width:1100px; margin:0 auto; }
+  .course-list { display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:2.5rem; }
+  .course-card { background:var(--bg-2); padding:2.5rem; position:relative; overflow:hidden; transition:background 0.2s; }
+  .course-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--rust-dim); transition:background 0.2s; }
+  .course-card:hover { background:var(--bg-3); }
+  .course-card:hover::before { background:var(--rust); }
+  .course-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
+  .course-num { font-size:0.65rem; color:var(--rust); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.4rem; }
+  .course-status { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.75rem; border:1px solid var(--line-rust); color:var(--rust); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px)); }
+  .course-status.in-progress { color:var(--amber); border-color:rgba(212,137,42,0.3); }
+  .course-desc { font-size:0.82rem; color:var(--cream-dim); line-height:1.9; margin-bottom:1.25rem; max-width:720px; }
+  .competency-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:0.5rem; margin-bottom:1.5rem; }
+  .competency-item { font-size:0.72rem; color:var(--muted); letter-spacing:0.04em; padding-left:1rem; position:relative; line-height:1.6; }
+  .competency-item::before { content:'›'; position:absolute; left:0; color:var(--rust); }
+  .artifact-zone { margin-top:1.5rem; border:1px dashed var(--line-rust); background:rgba(193,68,14,0.04); padding:1.5rem 2rem; }
+  .artifact-label { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--rust); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .artifact-label::before { content:'//'; opacity:0.5; }
+  .artifact-placeholder { display:flex; align-items:center; justify-content:center; min-height:160px; border:1px solid var(--line); background:var(--bg-3); color:var(--muted); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; text-align:center; padding:1rem; flex-direction:column; }
+  .artifact-placeholder .placeholder-icon { font-size:1.5rem; opacity:0.3; margin-bottom:0.5rem; }
+  .artifact-img { width:100%; display:block; border:1px solid var(--line); }
+  .artifact-caption { font-size:0.68rem; color:var(--muted); letter-spacing:0.06em; margin-top:0.5rem; font-style:italic; }
+  .artifact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+  .artifact-link { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); text-decoration:none; border:1px solid rgba(212,137,42,0.3); padding:0.4rem 1rem; margin-top:0.75rem; transition:all 0.2s; }
+  .artifact-link:hover { background:var(--amber-dim); }
+  .artifact-link::after { content:'↗'; }
+  .tag-row { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1rem; }
+  .tag { font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; background:var(--amber-dim); color:var(--amber); border:1px solid rgba(212,137,42,0.2); }
+  .track-nav { display:flex; gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:3rem; flex-wrap:wrap; }
+  .track-nav-item { flex:1; min-width:120px; padding:1rem 1.25rem; background:var(--bg-2); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:all 0.2s; text-align:center; }
+  .track-nav-item:hover { background:var(--bg-3); color:var(--cream); }
+  .track-nav-item.active { background:var(--rust-glow); color:var(--rust); border-bottom:2px solid var(--rust); }
+  .contact-block { background:var(--bg-2); border:1px solid var(--line-rust); padding:3rem; max-width:1100px; margin:0 auto 4rem; display:flex; justify-content:space-between; align-items:center; gap:2rem; flex-wrap:wrap; position:relative; overflow:hidden; }
+  .contact-block::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--rust),var(--amber),transparent); }
+  .contact-text h2 { margin-bottom:0.5rem; font-size:1.8rem; }
+  .contact-text p { font-size:0.82rem; color:var(--muted); max-width:380px; }
+  .contact-links { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:0.7rem 1.5rem; font-family:'Space Mono',monospace; font-size:0.78rem; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; cursor:pointer; border:none; }
+  .btn-rust { background:var(--rust); color:#fff; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+  .btn-rust:hover { background:#d94f17; }
+  .btn-outline { border:1px solid var(--line-rust); color:var(--rust); background:transparent; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+  .btn-outline:hover { background:var(--rust-glow); }
+  footer { text-align:center; padding:2rem 3rem; font-size:0.7rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; border-top:1px solid var(--line); }
+  @media (max-width:768px) {
+    nav { padding:1rem 1.5rem; } .nav-links { gap:1.25rem; }
+    .page-header { padding:7rem 1.5rem 3rem; } .section-wrap { padding:3rem 1.5rem; }
+    .course-card { padding:1.5rem; } .contact-block { flex-direction:column; padding:2rem 1.5rem; }
+    .header-bg-text { display:none; } .competency-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Megahn Christianson</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#education">Education</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Academic Portfolio</span>
+    <span class="breadcrumb-sep">›</span>
+    <span>Business Track</span>
+  </div>
+  <div class="track-eyebrow">Technology Track</div>
+  <h1><span class="scratch">Busi</span>ness<br>Track.</h1>
+  <p class="page-intro">
+    The bridge between data and decisions. This track covers the tools and frameworks
+    analysts use to communicate with stakeholders — Excel, business analytics, systems
+    design, and project management. Where technical skills meet organizational reality.
+  </p>
+  <div class="vendor-links-row">
+    <a href="https://www.microsoft.com/en-us/microsoft-365/excel" target="_blank" class="vendor-link">Microsoft Excel</a>
+    <a href="https://www.microsoft.com/en-us/microsoft-365/project/project-management-software" target="_blank" class="vendor-link">Microsoft Project</a>
+    <a href="https://www.lucidchart.com/" target="_blank" class="vendor-link">Lucidchart</a>
+    <a href="https://www.microsoft.com/en-us/microsoft-365/visio" target="_blank" class="vendor-link">Visio</a>
+  </div>
+  <div class="header-bg-text">BUSI.</div>
+</div>
+
+<hr class="divider">
+
+<div class="section-wrap" style="padding-bottom:0;">
+  <div class="section-label">Portfolio</div>
+  <h2>All tracks.</h2>
+  <p style="font-size:0.82rem;color:var(--muted);margin:0.5rem 0 1.5rem;max-width:500px;">Navigate between technology tracks.</p>
+  <div class="track-nav">
+    <a href="programming-track.html" class="track-nav-item">Programming</a>
+    <a href="data-track.html" class="track-nav-item">Data</a>
+    <a href="reportingTrack.html" class="track-nav-item">Reporting</a>
+    <a href="business-track.html" class="track-nav-item active">Business</a>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-label">Courses</div>
+  <h2>What I built.</h2>
+
+  <div class="course-list">
+
+    <!-- MICROSOFT EXCEL -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-103-170</div>
+          <h3>Microsoft Excel</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Deep dive into Excel as a professional data tool — beyond basic spreadsheets into
+        advanced formulas, conditional formatting, charts, pivot tables, and data dashboards.
+        Also covered Outlook integration, calendar management, and preparing Excel documents
+        for business communication. The course that made Excel feel like a real analytical tool.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">Advanced formulas — ROUND, DATE, financial functions</div>
+        <div class="competency-item">Conditional formatting and data validation</div>
+        <div class="competency-item">Charts — creation, modification, trend analysis</div>
+        <div class="competency-item">Pivot tables and pivot charts</div>
+        <div class="competency-item">What-if analysis and forecasting</div>
+        <div class="competency-item">Outlook integration — email, calendar, contacts</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Microsoft Excel</span>
+        <span class="tag">Pivot Tables</span>
+        <span class="tag">Charts</span>
+        <span class="tag">Formulas</span>
+        <span class="tag">Dashboards</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <!-- REPLACE with screenshot: <img src="Artifacts/[filename].png" class="artifact-img" alt="Excel dashboard"> -->
+            <div class="artifact-placeholder">
+              <div class="placeholder-icon">📊</div>
+              <span>Add screenshot: Excel dashboard<br>or chart with advanced formulas</span>
+            </div>
+            <p class="artifact-caption">Excel dashboard — charts and conditional formatting</p>
+            <!-- OPTIONALLY add link to .xlsx in repo: <a href="https://github.com/MCChristi/[repo]/blob/main/[file].xlsx" class="artifact-link">View workbook on GitHub</a> -->
+          </div>
+          <div>
+            <!-- REPLACE with screenshot: <img src="Artifacts/[filename].png" class="artifact-img" alt="Pivot table"> -->
+            <div class="artifact-placeholder">
+              <div class="placeholder-icon">🔢</div>
+              <span>Add screenshot: pivot table<br>or pivot chart</span>
+            </div>
+            <p class="artifact-caption">Pivot table and pivot chart — data summarization</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEMS ANALYSIS & DESIGN -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-156-101</div>
+          <h3>Systems Analysis &amp; Design</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Full coverage of the System Development Life Cycle (SDLC) — from strategic planning
+        and requirements gathering through design, implementation, and support. Produced
+        real deliverables at each phase: SWOT analyses, data flow diagrams, ERDs, use case
+        diagrams, project charters, and risk management plans. Also covered agile, RAD,
+        and object-oriented analysis methods.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">SDLC phases — planning through support</div>
+        <div class="competency-item">SWOT analysis and strategic planning</div>
+        <div class="competency-item">Requirements gathering — interviews, JAD, RAD</div>
+        <div class="competency-item">Data flow diagrams and data dictionaries</div>
+        <div class="competency-item">Entity-relationship diagrams (ERDs)</div>
+        <div class="competency-item">Risk management and project charter creation</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">SDLC</span>
+        <span class="tag">Requirements Gathering</span>
+        <span class="tag">DFD</span>
+        <span class="tag">ERD</span>
+        <span class="tag">SWOT</span>
+        <span class="tag">Agile</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/ApplianceWarehouse Relationships SAD.png" class="artifact-img" alt="Appliance Warehouse Case Study Database">
+            <p class="artifact-caption">Appliance Warehouse Case Study - Data Relationships view</p>
+          <div>
+          </div>
+            <img src="Artifacts/ApplianceWarehouse RiskRegister SAD.png" class="artifact-img" alt="Appliace Warehouse Case Study Risk Register">
+            <p class="artifact-caption">Appliance Warehouse Case Study - Risk Register</p>
+          </div>
+          <div>
+            <img src="Artifacts/ApplianceWarehouseCaseStudyDataModel SAD.png" class="artifact-img" alt="Appliace Warehouse Case Study">
+            <p class="artifact-caption">Appliance Warehouse Case Study - Data Model</p>
+          </div>
+          <div>
+            <img src="Artifacts/ApplianceWarehouseCaseStudySWOT SAD.jpg" class="artifact-caption" alt="Appliace Warehouse Case Study">
+            <p class="artifact-caption">Appliance Warehouse Case Study - SWOT Diagram</p>
+          </div>
+          <div>
+            <img src="Artifacts/ApplianceWarehouseCaseStudyUseCaseDiagram SAD.png" class="artifact-img" alt="Appliace Warehouse Case Study">
+            <p class="artifact-caption">Appliance Warehouse Case Study - Use Case Diagram</p>
+          </div>
+          <div>
+            <img src="Artifacts/ApplianceWarehouseSiteHierarchy SAD.png" class="artifact-img" alt="Appliace Warehouse Case Study">
+            <p class="artifact-caption">Appliance Warehouse Case Study - Site Hierarchy</p>
+          </div>
+          <div>
+            <img src="Artifacts/TogetherFarmsDFD SAD.png" class="artifact-img" alt="Together Farms Case Study">
+            <p class="artifact-caption">Together Farms Case Study - DFD</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS ANALYTICS -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-102-109</div>
+          <h3>Business Analytics</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Applied descriptive, predictive, and prescriptive analytics using Excel as the primary
+        tool. Covered KPIs, data mining concepts, Index/Match, What-if analysis, pivot tables,
+        and dashboard design. The course culminated in a comprehensive business analysis
+        project — identifying a real business issue, pulling supporting data, and delivering
+        a data-backed recommendation.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">Descriptive, predictive, and prescriptive analytics</div>
+        <div class="competency-item">KPI identification across industries</div>
+        <div class="competency-item">INDEX/MATCH and advanced logical functions</div>
+        <div class="competency-item">What-if analysis and forecasting</div>
+        <div class="competency-item">Data dashboards for business decisions</div>
+        <div class="competency-item">Business recommendation from data analysis</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Business Analytics</span>
+        <span class="tag">Excel</span>
+        <span class="tag">KPIs</span>
+        <span class="tag">Dashboards</span>
+        <span class="tag">Data Mining</span>
+        <span class="tag">Forecasting</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+           <img src="Artifacts/DescriptiveAnalysis VLookUp BA.png" class="artifact-img" alt="Descriptive Analysis The Best Books of the 2020's">
+            <p class="artifact-caption">Descriptive Analysis of The Best Books of the Decade 2020's</p>
+            <a href="Artifacts/DescriptiveAnalysis BestBooksofthe2020s BA.xlsx" class="artifact-link" target="_blank">View Full Workbook</a>
+          </div>  
+          <div>
+            <img class="Artifacts/PerscriptiveAnalysis1 BA.png" class="artifact-img" alt="Perscriptive Analysis">
+            <p class="artifact-caption">Perscriptive Analysis - Example 1</p>
+          </div>
+          <div>
+            <img class="Artifacts/PerscriptiveAnalysis2 BA.png" class="artifact-img" alt="Perscriptive Analysis">
+            <p class="artifact-caption">Perscriptive Analysis - Example 2</p>
+          </div>
+          <div>
+            <img class="Artifacts/TextbookDataFile Forecasting BA.png" class="artifact-img" alt="Forecasting">
+            <p class="artifact-caption">Text Book Data - Forecasting</p>
+          </div>
+          <div>
+            <img class="Artifacts/VintageRestaurants TimeSeriesChart BA.png" class="artifact-img" alt="Time Series Chart">
+            <p class="artifact-caption">Vintage Restaurant - Time Series Chart</p>
+          </div>
+          <div>
+            <img class="Artifacts/ComboChart BA.png" class="artifact-img" alt="Budget vs Actual P&L Combo Chart — Subaru Legacy">
+            <p class="artifact-caption">Budget vs Actual analysis — combo chart comparing projected and actual sales, gross profit, and operating margin across 12 months</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT MANAGEMENT -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-102-188</div>
+          <h3>Project Management</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Comprehensive project management covering the full PM lifecycle — from stakeholder
+        identification and project charter creation through WBS, scheduling, risk management,
+        and project close. Practiced negotiation and conflict management, produced a full
+        Request for Proposal response, and delivered a post-mortem presentation. Grounded
+        in PMI methodology with real-world application focus.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">Stakeholder identification and communication</div>
+        <div class="competency-item">Project charter and scope management</div>
+        <div class="competency-item">Work Breakdown Structure (WBS) in PM software</div>
+        <div class="competency-item">Critical path and Gantt chart scheduling</div>
+        <div class="competency-item">Risk management — mitigation and contingency plans</div>
+        <div class="competency-item">Project post-mortem and close documentation</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Project Management</span>
+        <span class="tag">PMI</span>
+        <span class="tag">WBS</span>
+        <span class="tag">Gantt Chart</span>
+        <span class="tag">Risk Management</span>
+        <span class="tag">Microsoft Project</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/ProjectCharter PrjMngmt.png" class="artifact-img" alt="Project Charter">
+            <p class="artifact-caption">Project Charter</p>
+            <a href="Artifacts/ProjectCharter PrjMngmt.pdf" class="artifact-link" target="_blank">View Full Project Charter</a>
+          </div>
+          <div>
+            <img src="Artifacts/RiskRegister PrjMngmt.png" class="artifact-img" alt="Risk Register">
+            <p class="artifact-caption">Risk Register</p>
+          </div>
+          <div>
+            <img src="Artifacts/FormalChangeRequest PrjMngmt.png" class="artifact-img" alt="Formal Change Request">
+            <p class="artifact-caption">Formal Change Request</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="contact-block">
+  <div class="contact-text">
+    <div class="section-label">Contact</div>
+    <h2>Let's talk data.</h2>
+    <p>Open to data analyst roles, internships, and conversations about scalable data solutions.</p>
+  </div>
+  <div class="contact-links">
+    <a href="index.html" class="btn btn-rust">Back to Portfolio</a>
+    <a href="https://github.com/MCChristi" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/megahn-christianson-359172227/" class="btn btn-outline" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<footer>Built with GitHub Pages &nbsp;·&nbsp; Megahn Christianson &copy; 2026</footer>
+</body>
+</html>

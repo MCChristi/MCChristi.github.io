@@ -1,0 +1,76 @@
+name,plant_type,season,location,notes,is_native
+Tomato,Vegetable,Summer,Raised Bed 1,Needs cage support,FALSE
+Basil,Herb,Summer,Raised Bed 1,Good companion for tomato,FALSE
+Milkweed,Flower,Summer,Landscape,Pollinator friendly,TRUE
+Blue Grama,Grass_Sedge,Fall,Landscape,Drought tolerant,TRUE
+Apple,Fruit,Fall,Backyard Tree,Prune in winter,FALSE
+Purple Coneflower,Flower,Summer,Landscape,Native prairie plant,TRUE
+Prairifire Crabapple,Fruit,Fall,Orchard,Persistant wildlife fruit,FALSE
+Dolgo Crabapple,Fruit,Fall,Orchard,Beautiful fruit makes flavorful ruby red jelly,FALSE
+Montmorency Cherry,Fruit,Fall,Orchard,Aromatic firm fleshed bright red fruit,FALSE
+Garfield Plantation Pie Cherry,Fruit,Fall,Orchard,Hardy productive extremely long lived,FALSE
+Bottlebrush Grass,Grass_Sedge,Summer,Landscape,,TRUE
+Pennsylvania Sedge,Grass_Sedge,Spring,Landscape,,TRUE
+Virgins Bower,Vine,Summer,Landscape,,TRUE
+Meadowsweet,Shrub,Summer,Landscape,,TRUE
+Steeplebush,Shrub,Summer,Landscape,,TRUE
+Black Eyed Susan,Flower,Summer,Landscape,,TRUE
+Blue Flag Iris,Flower,Summer,Landscape,,TRUE
+Cardinal Flower,Flower,Summer,Landscape,,TRUE
+Foxglove Beardtongue,Flower,Spring,Landscape,,TRUE
+Boston Pickling Cucumber,Vegetable,Summer,Raised Bed 2,,FALSE
+Rainbow Mixed Carrots,Vegetable,Summer,Raised Bed 2,,FALSE
+Purple Beauty Bell Pepper,Vegetable,Summer,Raised Bed 1,,FALSE
+Early Jalapeno,Vegetable,Summer,Raised Bed 3,,FALSE
+Sweet Cherry Tomato,Vegetable,Summer,Raised Bed 1,,FALSE
+Golden Zucchini,Vegetable,Fall,Landscape,Good for erosion control,TRUE
+Cherry Belle Radish,Vegetable,Fall,Raised Bed 1,Shade tolerant,FALSE
+Sweet Basil,Grass_Sedge,Spring,Landscape,Good for erosion control,TRUE
+Lavender,Flower,Fall,Landscape,,TRUE
+Dill,Herb,Fall,Orchard,Harvest before frost,FALSE
+Cilantro,Herb,Summer,Landscape,Good for erosion control,FALSE
+Oregano,Herb,Spring,Raised Bed 3,Needs regular watering,TRUE
+Chives,Herb,Spring,Raised Bed 1,Cold hardy,FALSE
+Snapdragon,Flower,Summer,Raised Bed 3,Pollinator favorite,TRUE
+Marigold,Flower,Summer,Landscape,Cold hardy,TRUE
+Petunia,Flower,Fall,Raised Bed 1,Cold hardy,TRUE
+Zinnia,Flower,Fall,Landscape,Prune after blooming,TRUE
+Calendula,Flower,Spring,Orchard,Prune after blooming,TRUE
+Rosemary,Herb,Fall,Landscape,Native to Wisconsin,FALSE
+Thyme,Herb,Summer,Landscape,Pollinator favorite,TRUE
+Russian Sage,Herb,Spring,Landscape,Prune after blooming,FALSE
+Bee Balm,Flower,Summer,Landscape,Full sun preferred,TRUE
+Yarrow,Flower,Spring,Orchard,Cold hardy,TRUE
+Columbine,Flower,Spring,Landscape,Native to Wisconsin,TRUE
+Hollyhock,Flower,Summer,Raised Bed 2,Harvest before frost,TRUE
+Anise Hyssop,Flower,Fall,Raised Bed 2,Cold hardy,TRUE
+New England Aster,Flower,Fall,Landscape,,TRUE
+Joe Pye Weed,Flower,Summer,Raised Bed 1,Good for erosion control,FALSE
+Serviceberry,Vegetable,Summer,Raised Bed 3,Full sun preferred,FALSE
+Red Osier Dogwood,Shrub,Summer,Landscape,Native to Wisconsin,TRUE
+Highbush Cranberry,Herb,Fall,Raised Bed 1,Needs regular watering,FALSE
+Elderberry,Fruit,Summer,Landscape,Prune after blooming,TRUE
+Wild Strawberry,Fruit,Spring,Orchard,Good for erosion control,TRUE
+Leadplant,Flower,Summer,Raised Bed 2,Shade tolerant,FALSE
+Big Bluestem,Grass_Sedge,Spring,Landscape,Native to Wisconsin,FALSE
+Little Bluestem,Grass_Sedge,Fall,Landscape,Full sun preferred,FALSE
+Switchgrass,Grass_Sedge,Fall,Orchard,Full sun preferred,FALSE
+Prairie Dropseed,Grass_Sedge,Spring,Landscape,Prune after blooming,FALSE
+Indian Grass,Grass_Sedge,Summer,Raised Bed 2,Cold hardy,FALSE
+Creeping Thyme,Flower,Summer,Raised Bed 2,Native to Wisconsin,TRUE
+Daylily,Flower,Summer,Orchard,Cold hardy,FALSE
+Hosta,Shrub,Summer,Landscape,Full sun preferred,TRUE
+Sedum,Flower,Summer,Raised Bed 1,Needs regular watering,FALSE
+Coral Bells,Flower,Fall,Raised Bed 1,Needs regular watering,FALSE
+Snow-on-the-Mountain,Flower,Spring,Landscape,Good for erosion control,FALSE
+Vinca Vine,Vine,Summer,Orchard,,FALSE
+Clematis,Vine,Spring,Landscape,Cold hardy,FALSE
+Virginia Creeper,Flower,Spring,Orchard,Shade tolerant,FALSE
+American Bittersweet,Flower,Spring,Landscape,Pollinator favorite,FALSE
+Wild Grape,Vine,Fall,Raised Bed 1,Cold hardy,FALSE
+Common Milkweed,Flower,Fall,Raised Bed 2,,TRUE
+Swamp Milkweed,Flower,Summer,Landscape,Harvest before frost,TRUE
+Butterfly Weed,Flower,Fall,Landscape,Needs regular watering,TRUE
+False Indigo,Flower,Spring,Landscape,,FALSE
+Lupine,Flower,Summer,Landscape,Needs regular watering,TRUE
+Jacobs Ladder,Flower,Summer,Raised Bed 3,Pollinator favorite,FALSE

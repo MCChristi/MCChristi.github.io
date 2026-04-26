@@ -1,0 +1,1 @@
+This console-based Garden Planner helps users organize their garden by allowing them to log and review plantings by season, type, and location. It supports sustainable planning by helping avoid overcrowding and suggesting compatible planting strategies. It also helps support biodiversity by tracking if native plants have been used. 

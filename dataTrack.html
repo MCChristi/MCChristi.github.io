@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Track | Megahn Christianson</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#0f0d0b; --bg-2:#1a1612; --bg-3:#241f18;
+    --rust:#c1440e; --rust-dim:#8a2f09; --rust-glow:rgba(193,68,14,0.15);
+    --amber:#d4892a; --amber-dim:rgba(212,137,42,0.12);
+    --cream:#e8dcc8; --cream-dim:rgba(232,220,200,0.55);
+    --muted:rgba(232,220,200,0.35); --line:rgba(232,220,200,0.08);
+    --line-rust:rgba(193,68,14,0.3);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Space Mono',monospace; background:var(--bg); color:var(--cream); line-height:1.7; overflow-x:hidden; }
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:1.1rem 3rem; background:rgba(15,13,11,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line-rust); }
+  .nav-name { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; letter-spacing:0.04em; color:var(--rust); text-decoration:none; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--rust); }
+  .page-header { padding:9rem 3rem 4rem; max-width:1100px; margin:0 auto; position:relative; }
+  .breadcrumb { font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .breadcrumb a { color:var(--rust); text-decoration:none; }
+  .breadcrumb a:hover { opacity:0.7; }
+  .breadcrumb-sep { color:var(--muted); }
+  .track-eyebrow { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:1rem; display:flex; align-items:center; gap:0.75rem; }
+  .track-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--rust); }
+  h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.5rem,6vw,5rem); line-height:1.0; color:var(--cream); margin-bottom:1rem; letter-spacing:-0.02em; }
+  h1 .scratch { color:var(--rust); font-style:italic; }
+  .page-intro { font-size:0.88rem; color:var(--cream-dim); max-width:620px; line-height:1.9; margin-bottom:1.5rem; }
+  .vendor-link { display:inline-flex; align-items:center; gap:0.4rem; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); text-decoration:none; border-bottom:1px solid rgba(212,137,42,0.3); padding-bottom:1px; transition:border-color 0.2s,color 0.2s; }
+  .vendor-link:hover { color:var(--cream); border-color:var(--cream-dim); }
+  .vendor-link::after { content:'↗'; font-size:0.9em; }
+  .vendor-links-row { display:flex; gap:1.5rem; flex-wrap:wrap; margin-top:0.5rem; }
+  .header-bg-text { position:absolute; bottom:1rem; right:-1rem; font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(4rem,10vw,8rem); color:rgba(193,68,14,0.04); user-select:none; letter-spacing:-0.04em; line-height:1; pointer-events:none; }
+  .section-wrap { padding:4rem 3rem; max-width:1100px; margin:0 auto; }
+  .section-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
+  .section-label::before { content:''; display:inline-block; width:20px; height:1px; background:var(--rust); }
+  h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(1.6rem,2.5vw,2.2rem); color:var(--cream); margin-bottom:0.5rem; letter-spacing:-0.01em; }
+  h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; color:var(--cream); margin-bottom:0.4rem; }
+  hr.divider { border:none; border-top:1px solid var(--line); max-width:1100px; margin:0 auto; }
+  .course-list { display:flex; flex-direction:column; gap:1px; background:var(--line); border:1px solid var(--line); margin-top:2.5rem; }
+  .course-card { background:var(--bg-2); padding:2.5rem; position:relative; overflow:hidden; transition:background 0.2s; }
+  .course-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--rust-dim); transition:background 0.2s; }
+  .course-card:hover { background:var(--bg-3); }
+  .course-card:hover::before { background:var(--rust); }
+  .course-header { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1rem; flex-wrap:wrap; }
+  .course-num { font-size:0.65rem; color:var(--rust); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.4rem; }
+  .course-status { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.75rem; border:1px solid var(--line-rust); color:var(--rust); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px)); }
+  .course-status.in-progress { color:var(--amber); border-color:rgba(212,137,42,0.3); }
+  .course-desc { font-size:0.82rem; color:var(--cream-dim); line-height:1.9; margin-bottom:1.25rem; max-width:720px; }
+  .competency-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:0.5rem; margin-bottom:1.5rem; }
+  .competency-item { font-size:0.72rem; color:var(--muted); letter-spacing:0.04em; padding-left:1rem; position:relative; line-height:1.6; }
+  .competency-item::before { content:'›'; position:absolute; left:0; color:var(--rust); }
+  .artifact-zone { margin-top:1.5rem; border:1px dashed var(--line-rust); background:rgba(193,68,14,0.04); padding:1.5rem 2rem; }
+  .artifact-label { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--rust); margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+  .artifact-label::before { content:'//'; opacity:0.5; }
+  .artifact-placeholder { display:flex; align-items:center; justify-content:center; min-height:160px; border:1px solid var(--line); background:var(--bg-3); color:var(--muted); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; text-align:center; padding:1rem; flex-direction:column; }
+  .artifact-placeholder .placeholder-icon { font-size:1.5rem; opacity:0.3; margin-bottom:0.5rem; }
+  .artifact-img { width:100%; display:block; border:1px solid var(--line); }
+  .artifact-caption { font-size:0.68rem; color:var(--muted); letter-spacing:0.06em; margin-top:0.5rem; font-style:italic; }
+  .artifact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
+  .artifact-link { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); text-decoration:none; border:1px solid rgba(212,137,42,0.3); padding:0.4rem 1rem; margin-top:0.75rem; transition:all 0.2s; }
+  .artifact-link:hover { background:var(--amber-dim); }
+  .artifact-link::after { content:'↗'; }
+  .tag-row { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1rem; }
+  .tag { font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.2rem 0.6rem; background:var(--amber-dim); color:var(--amber); border:1px solid rgba(212,137,42,0.2); }
+  .track-nav { display:flex; gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:3rem; flex-wrap:wrap; }
+  .track-nav-item { flex:1; min-width:120px; padding:1rem 1.25rem; background:var(--bg-2); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:all 0.2s; text-align:center; }
+  .track-nav-item:hover { background:var(--bg-3); color:var(--cream); }
+  .track-nav-item.active { background:var(--rust-glow); color:var(--rust); border-bottom:2px solid var(--rust); }
+  .contact-block { background:var(--bg-2); border:1px solid var(--line-rust); padding:3rem; max-width:1100px; margin:0 auto 4rem; display:flex; justify-content:space-between; align-items:center; gap:2rem; flex-wrap:wrap; position:relative; overflow:hidden; }
+  .contact-block::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:linear-gradient(90deg,var(--rust),var(--amber),transparent); }
+  .contact-text h2 { margin-bottom:0.5rem; font-size:1.8rem; }
+  .contact-text p { font-size:0.82rem; color:var(--muted); max-width:380px; }
+  .contact-links { display:flex; gap:1rem; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:0.7rem 1.5rem; font-family:'Space Mono',monospace; font-size:0.78rem; text-decoration:none; letter-spacing:0.06em; text-transform:uppercase; transition:all 0.2s; cursor:pointer; border:none; }
+  .btn-rust { background:var(--rust); color:#fff; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+  .btn-rust:hover { background:#d94f17; }
+  .btn-outline { border:1px solid var(--line-rust); color:var(--rust); background:transparent; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+  .btn-outline:hover { background:var(--rust-glow); }
+  footer { text-align:center; padding:2rem 3rem; font-size:0.7rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; border-top:1px solid var(--line); }
+  @media (max-width:768px) {
+    nav { padding:1rem 1.5rem; } .nav-links { gap:1.25rem; }
+    .page-header { padding:7rem 1.5rem 3rem; } .section-wrap { padding:3rem 1.5rem; }
+    .course-card { padding:1.5rem; } .contact-block { flex-direction:column; padding:2rem 1.5rem; }
+    .header-bg-text { display:none; } .competency-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-name">Megahn Christianson</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#education">Education</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>Academic Portfolio</span>
+    <span class="breadcrumb-sep">›</span>
+    <span>Data Track</span>
+  </div>
+  <div class="track-eyebrow">Technology Track</div>
+  <h1><span class="scratch">Da</span>ta<br>Track.</h1>
+  <p class="page-intro">
+    Where data lives before it becomes a dashboard. This track covers relational database
+    design, complex SQL, ETL pipelines, and data security — the unglamorous foundation
+    that makes everything else possible.
+  </p>
+  <div class="vendor-links-row">
+    <a href="https://www.mysql.com/" target="_blank" class="vendor-link">MySQL</a>
+    <a href="https://learn.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms" target="_blank" class="vendor-link">SQL Server / SSMS</a>
+    <a href="https://www.sqlite.org/" target="_blank" class="vendor-link">SQLite</a>
+    <a href="https://learn.microsoft.com/en-us/power-query/" target="_blank" class="vendor-link">Power Query / ETL</a>
+  </div>
+  <div class="header-bg-text">DATA.</div>
+</div>
+
+<hr class="divider">
+
+<div class="section-wrap" style="padding-bottom:0;">
+  <div class="section-label">Portfolio</div>
+  <h2>All tracks.</h2>
+  <p style="font-size:0.82rem;color:var(--muted);margin:0.5rem 0 1.5rem;max-width:500px;">Navigate between technology tracks.</p>
+  <div class="track-nav">
+    <a href="programming-track.html" class="track-nav-item">Programming</a>
+    <a href="data-track.html" class="track-nav-item active">Data</a>
+    <a href="reportingTrack.html" class="track-nav-item">Reporting</a>
+    <a href="business-track.html" class="track-nav-item">Business</a>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <div class="section-label">Courses</div>
+  <h2>What I built.</h2>
+
+  <div class="course-list">
+
+    <!-- DATABASE 1 -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-152-132</div>
+          <h3>Database 1</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Foundation of relational database theory and SQL. Covered how databases are structured,
+        how to design them with ERDs, and how to query them — from basic SELECT statements
+        all the way through multi-table JOINs, subqueries, and aggregate functions. Built
+        and queried databases in a DBMS interface from scratch.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">Relational database theory and terminology</div>
+        <div class="competency-item">ERD design — keys, cardinality, data types</div>
+        <div class="competency-item">SELECT, WHERE, ORDER BY, GROUP BY</div>
+        <div class="competency-item">INNER and OUTER JOINs across multiple tables</div>
+        <div class="competency-item">Subqueries and UNION statements</div>
+        <div class="competency-item">Aggregate functions — SUM, COUNT, AVG, HAVING</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">SQL</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">ERD</span>
+        <span class="tag">Relational Design</span>
+        <span class="tag">Subqueries</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/Data/Database1/DroneportationEER DB1.png" class="artifact-img" alt="Droneportation EER diagram showing relational database design with tables for Drone, Model, FlightReservation, Passenger, and related entities">
+            <p class="artifact-caption">Entity-Relationship Diagram — Droneportation relational database design</p>
+          </div>
+          <div>
+            <img src="Artifacts/Data/Database1/Droneportation Query DB1.png" class="artifact-img" alt="SQL query results showing correlated subquery with JOINs, GROUP BY, and average cost per mile calculation">
+            <p class="artifact-caption">Correlated subquery — average cost per mile by drone and brand filter</p>
+            <a href="https://github.com/MCChristi/MCChristi.github.io/blob/main/Artifacts/Data/Database1/DroneportationQueries DB1.sql" class="artifact-link" target="_blank">View SQL on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATABASE 2 -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-152-136</div>
+          <h3>Database 2</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Advanced database design and administration. Installed and configured a full DBMS,
+        managed database users, and built multi-table relational databases from scratch using
+        normalization to 3NF. Wrote complex SQL including stored procedures, scripts, and
+        computed columns. Designed, tested, and documented a complete database from ERD
+        through implementation.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">DBMS installation and configuration</div>
+        <div class="competency-item">Database user and permission management</div>
+        <div class="competency-item">Normalization to third normal form (3NF)</div>
+        <div class="competency-item">ERD to relational model conversion</div>
+        <div class="competency-item">Stored procedures and SQL scripts</div>
+        <div class="competency-item">Database testing and test plan documentation</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">SQL</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">SSMS</span>
+        <span class="tag">ERD</span>
+        <span class="tag">Normalization</span>
+        <span class="tag">Stored Procedures</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/Data/Database2/LinkedINERD DB2.png" class="artifact-img" alt="LinkedIn relational model ERD showing tables for User, Company, Jobs, Skills, Experience, Education, and related entities">
+            <p class="artifact-caption">LinkedIn relational model — normalized ERD with 15+ tables</p>
+          </div>
+          <div>
+            <img src="Artifacts/Data/Database2/TableauExample DB2.png" class="artifact-img" alt="Tableau dashboard showing global sales map, sales per year line chart, and employee sale performance stacked bar chart">
+            <p class="artifact-caption">Tableau dashboard — global sales map, yearly trends, and employee performance</p>
+            <a href="https://github.com/MCChristi/MCChristi.github.io/blob/main/Artifacts/Data/Database2/LinkedINDatabase DB2.sql" class="artifact-link" target="_blank">View database SQL on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTRODUCTORY ETL -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-156-109</div>
+          <h3>Introductory ETL</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Hands-on with the full Extract, Transform, Load pipeline — pulling data from structured
+        and unstructured sources, cleaning and transforming it to meet business requirements,
+        and loading it into a target destination for BI analysis. Covered data quality practices,
+        validation techniques, ELT vs ETL, and an intro to cloud database solutions and
+        data warehousing concepts.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">ETL pipeline design and data integration</div>
+        <div class="competency-item">Structured and unstructured data extraction</div>
+        <div class="competency-item">Data cleaning and transformation methods</div>
+        <div class="competency-item">Data quality and validation techniques</div>
+        <div class="competency-item">ELT vs ETL — when to use each</div>
+        <div class="competency-item">Intro to data warehousing and cloud databases</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">ETL</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Data Quality</span>
+        <span class="tag">Power Query</span>
+        <span class="tag">Data Warehousing</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/Data/ETL/CaseStudy ETL.png" class="artifact-img" alt="Alteryx Designer workflow showing ETL pipeline with two data inputs, data cleansing, join, conditional formula logic, and SQLite output — completed with 0 errors">
+            <p class="artifact-caption">Alteryx ETL pipeline — CSV + Excel inputs, cleanse, join, formula transform, SQLite output</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA SECURITY & PRIVACY -->
+    <div class="course-card">
+      <div class="course-header">
+        <div>
+          <div class="course-num">10-156-123</div>
+          <h3>Data Security &amp; Privacy</h3>
+        </div>
+        <span class="course-status">Completed</span>
+      </div>
+      <p class="course-desc">
+        Covered the regulatory, technical, and human sides of data security. Worked through
+        GDPR, HIPAA, and CCPA compliance requirements, practiced SQL Server security
+        configurations including login management, table permissions, stored procedure
+        encapsulation, and field-level encryption. Also covered network security fundamentals,
+        phishing/social engineering recognition, and incident response planning.
+      </p>
+      <div class="competency-grid">
+        <div class="competency-item">GDPR, HIPAA, and CCPA compliance frameworks</div>
+        <div class="competency-item">SQL Server login, user accounts, and permissions</div>
+        <div class="competency-item">Table-level and field-level encryption</div>
+        <div class="competency-item">Stored procedure encapsulation for SQL security</div>
+        <div class="competency-item">Phishing and social engineering identification</div>
+        <div class="competency-item">Incident response planning and breach notification</div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">GDPR</span>
+        <span class="tag">HIPAA</span>
+        <span class="tag">SQL Server Security</span>
+        <span class="tag">Encryption</span>
+        <span class="tag">Incident Response</span>
+      </div>
+      <div class="artifact-zone">
+        <div class="artifact-label">Deliverables &amp; Artifacts</div>
+        <div class="artifact-grid">
+          <div>
+            <img src="Artifacts/Data/DataPrivacySecurity/SSMSSecurityConfig DPS.png" class="artifact-img" alt="SQL Server Management Studio security configuration showing user logins and permissions setup">
+            <p class="artifact-caption">SSMS security config — user logins and permission management</p>
+          </div>
+          <div>
+            <img src="Artifacts/Data/DataPrivacySecurity/StoredProcedureLab DPS.png" class="artifact-img" alt="Stored procedure lab demonstrating SQL encapsulation for data security">
+            <p class="artifact-caption">Stored procedure lab — SQL encapsulation for access control</p>
+          </div>
+          <div>
+            <img src="Artifacts/Data/DataPrivacySecurity/BreachNotification DPS.png" class="artifact-img" alt="Security breach notification document preview">
+            <p class="artifact-caption">Security breach notification letter — incident response documentation</p>
+            <a href="Artifacts/Data/DataPrivacySecurity/SecurityBreach Notification DPS.pdf" class="artifact-link" target="_blank">View full document</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="contact-block">
+  <div class="contact-text">
+    <div class="section-label">Contact</div>
+    <h2>Let's talk data.</h2>
+    <p>Open to data analyst roles, internships, and conversations about scalable data solutions.</p>
+  </div>
+  <div class="contact-links">
+    <a href="index.html" class="btn btn-rust">Back to Portfolio</a>
+    <a href="https://github.com/MCChristi" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/megahn-christianson-359172227/" class="btn btn-outline" target="_blank">LinkedIn</a>
+  </div>
+</div>
+
+<footer>Built with GitHub Pages &nbsp;·&nbsp; Megahn Christianson &copy; 2026</footer>
+</body>
+</html>

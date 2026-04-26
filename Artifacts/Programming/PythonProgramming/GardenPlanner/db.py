@@ -2,7 +2,7 @@
 import sqlite3
 
 def connect():
-    return sqlite3.connect("Garden.sqlite")
+    return sqlite3.connect("C:/Users/Meg/Desktop/MCChristi.github.io/Artifacts/Programming/PythonProgramming/GardenPlanner/GardenDatabase PyProg.sqlite")
 
 def create_table():
     conn = connect()
